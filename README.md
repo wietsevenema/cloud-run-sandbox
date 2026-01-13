@@ -87,6 +87,16 @@ sandbox = await Sandbox.create(url, use_google_auth=True)
 
 # Execute a command
 process = await sandbox.exec('bash', "echo 'Hello from the sandbox!'")
+
+# Read the output
+output = await process.stdout.read_all()
+print(output)
+
+# Wait for the process to finish
+await process.wait()
+
+# Clean up the sandbox session
+await sandbox.kill()
 ```
 
 For a more detailed example, please see `examples/python/basic.py`.
